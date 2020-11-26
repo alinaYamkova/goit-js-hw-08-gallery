@@ -67,27 +67,3 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode"
 } 
   
-
-
-<!-- // const newGalleryCard = (importItms, idx) => {
-  //   const liItemRef = document.createElement('li');
-  //   liItemRef.classList.add("gallery__item");
-    
-  //   const aItemRef = document.createElement('a');
-  //   aItemRef.classList.add("gallery__link");
-  //   aItemRef.setAttribute('href', '${importItms.original}');
-    
-  //   const imgItemRef = document.createElement('img');
-  //   imgItemRef.classList.add("gallery__image");
-  //   imgItemRef.setAttribute('scr', importItm.preview);
-  //   imgItemRef.setAttribute('data-source', '${importItms.original}');
-  //   imgItemRef.setAttribute('alt', '${importItm.description}');
-  //   console.log(imgItemRef);
-  
-  //   aItemRef.appendChild(imgItemRef);
-  //   liItemRef.appendChild(aItemRef);
-  //   return liItemRfe;
-  // }
-  // const createdGalleryList = importItms.map(newGalleryCard).join('');
-  // imagListRef.append(...createdGalleryList );
-  // // console.log(createdGalletyList); -->

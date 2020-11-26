@@ -1,5 +1,5 @@
 //__1__//////////////////////////////////////////////////////////////////////////////////////////////////
-import importItms from './gallery-items.js';
+import importItms  from './gallery-items.js';
 
 const imgListRef = document.querySelector('.js-gallery');
 const newGalleryCard = importItms.map(({description, preview, original}) => {
@@ -14,38 +14,42 @@ imgListRef.innerHTML = newGalleryCard;
 console.log(imgListRef);
 
 const imgForModalData = document.querySelector('.gallery__image');
-const imgForModalSrc = document.querySelector('.lightbox__image');
-// imgForModalSrc.src.value = imgLinkValue;
-// console.log(imgForModalSrc);
+const imgForModal = document.querySelector('img.lightbox__image');
+// const dataSour = imgForModal.getAttribute('data-source').value;
+
 
 const closeModalRef = document.querySelector('button[data-action="close-lightbox"]');
-const openModalRef = document.querySelector('.div.lightbox');
+const openModalRef = document.querySelector('.lightbox .js-lightbox');
 const backDropRef = document.querySelector('.lightbox__image');
 
 imgListRef.addEventListener('click', onOpenModal);
 closeModalRef.addEventListener('click', onCloseModal);
 
+
+// imgListRef.addEventListener('click', (event) => {
 function onOpenModal (event) {
-  event.PreventDefault();
   if (event.target.nodeName === 'IMG') {
     openModalRef.classList.add("is-open");
     backDropRef.classList.add("is-open");
-    imgForModalSrc.src = event.target.href;
-    imgForModalSrc.alt = event.target.alt;
-    console.log(imgForModalSrc);
+    imgForModal.src = event.target.dataset.source;
+    imgForModal.alt = event.target.alt;
+    // console.log(dataSour);
   }
+
+  event.PreventDefault();
   window.addEventListener('keydown', onESCpress);
 };
 
+// closeModalRef.addEventListener('click', (event) => {
 function onCloseModal (event) {
-  event.preventDefault();
-  window.removeEventListener('keydown', onESCpress);
-
   if (event.target === event.currentTarget) {
     document.body.classList.remove("is-open");
     backDropRef.classList.remove("is-open");
-    imgForModalSrc.setAttribute('src', '');
+    imgForModal.src = DefaultValue;
   }
+  
+  event.preventDefault();
+  window.removeEventListener('keydown', onESCpress);
 };
 
 function onESCpress (event) {
@@ -53,28 +57,3 @@ function onESCpress (event) {
     onCloseModal();
   }
 }; 
-
-
-
-// if(e.target.nodeName === "I" || e.target.nodeName === "BUTTON") {
-//   refs.lightbox.classList.remove('is-open');
-// }
-
-
-
-
-// var gallery = document.querySelector('.gallery__image').attributes;
-// // for (let attr of gallery) {           
-// //   console.log( `${attr.name} = ${attr.value}` );
-// // }
-
-
-// const newArr = [];
-// // var gallery = gallery.attributes;                   
-// const fn = function() {
-//   for (var i = 1; i < gallery.length; i++) {
-//     newArr.push( gallery[i].value );
-//     console.log(newArr);
-//   }
-// }
-// // console.log(fn());
