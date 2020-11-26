@@ -1,15 +1,7 @@
-// 1. Создание и рендер разметки по массиву данных и предоставленному шаблону.
-// 2. Реализация делегирования на галерее ul.js-gallery и получение url большого изображения.
-// 3. Открытие модального окна по клику на элементе галереи.
-// 4. Подмена значения атрибута src элемента img.lightbox__image.
-// 5. Закрытие модального окна по клику на кнопку button[data-action="close-lightbox"].
-// 6. Очистка значения атрибута src элемента img.lightbox__image. Это необходимо для того, 
-//    чтобы при следующем открытии модального окна, пока грузится изображение, мы не видели предыдущее.
-
 //__1__//////////////////////////////////////////////////////////////////////////////////////////////////
 import importItms from './gallery-items.js';
-const imgListRef = document.querySelector('.js-gallery');
 
+const imgListRef = document.querySelector('.js-gallery');
 const newGalleryCard = importItms.map(({description, preview, original}) => {
   return `
   <li class = "gallery__item">
@@ -21,34 +13,38 @@ const newGalleryCard = importItms.map(({description, preview, original}) => {
 imgListRef.innerHTML = newGalleryCard;
 console.log(imgListRef);
 
-//__2__//////////////////////////////////////////////////////////////////////////////////////////////////
+const imgForModalData = document.querySelector('.gallery__image');
+const imgForModalSrc = document.querySelector('.lightbox__image');
+// imgForModalSrc.src.value = imgLinkValue;
+// console.log(imgForModalSrc);
 
-const imgForModal = document.querySelector('.lightbox__image');
-const enptyUrl = imgForModal.getAttribute('src', '');
-
-const openModalRef = document.querySelector('.div.lightbox');
 const closeModalRef = document.querySelector('button[data-action="close-lightbox"]');
-// const backDropRef = document.querySelector('.js-lightbox');
+const openModalRef = document.querySelector('.div.lightbox');
+const backDropRef = document.querySelector('.lightbox__image');
 
 imgListRef.addEventListener('click', onOpenModal);
 closeModalRef.addEventListener('click', onCloseModal);
 
 function onOpenModal (event) {
   event.PreventDefault();
-  window.addEventListener('keydown', onESCpress);
-  
   if (event.target.nodeName === 'IMG') {
-    enptyUrl.src.innerHTML = '${importItms.original}';
-    document.body.classList.add(".is-open");
+    openModalRef.classList.add("is-open");
+    backDropRef.classList.add("is-open");
+    imgForModalSrc.src = event.target.href;
+    imgForModalSrc.alt = event.target.alt;
+    console.log(imgForModalSrc);
   }
+  window.addEventListener('keydown', onESCpress);
 };
 
 function onCloseModal (event) {
   event.preventDefault();
+  window.removeEventListener('keydown', onESCpress);
 
   if (event.target === event.currentTarget) {
-    enptyUrl.src.innerHTML = '${importItms.prewiev}';
-    document.body.classList.remove(".is-open");
+    document.body.classList.remove("is-open");
+    backDropRef.classList.remove("is-open");
+    imgForModalSrc.setAttribute('src', '');
   }
 };
 
@@ -57,3 +53,28 @@ function onESCpress (event) {
     onCloseModal();
   }
 }; 
+
+
+
+// if(e.target.nodeName === "I" || e.target.nodeName === "BUTTON") {
+//   refs.lightbox.classList.remove('is-open');
+// }
+
+
+
+
+// var gallery = document.querySelector('.gallery__image').attributes;
+// // for (let attr of gallery) {           
+// //   console.log( `${attr.name} = ${attr.value}` );
+// // }
+
+
+// const newArr = [];
+// // var gallery = gallery.attributes;                   
+// const fn = function() {
+//   for (var i = 1; i < gallery.length; i++) {
+//     newArr.push( gallery[i].value );
+//     console.log(newArr);
+//   }
+// }
+// // console.log(fn());
