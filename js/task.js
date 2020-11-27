@@ -15,16 +15,12 @@ console.log(imgListRef);
 
 const imgForModalData = document.querySelector('.gallery__image');
 const imgForModal = document.querySelector('img.lightbox__image');
-// const dataSour = imgForModal.getAttribute('data-source').value;
-
-
 const closeModalRef = document.querySelector('button[data-action="close-lightbox"]');
 const openModalRef = document.querySelector('.lightbox .js-lightbox');
-const backDropRef = document.querySelector('.lightbox__image');
-
+// const dataSour = imgForModal.getAttribute('data-source').value;
+// const backDropRef = document.querySelector('.lightbox__image');
 imgListRef.addEventListener('click', onOpenModal);
 closeModalRef.addEventListener('click', onCloseModal);
-
 
 // imgListRef.addEventListener('click', (event) => {
 function onOpenModal (event) {
@@ -35,7 +31,6 @@ function onOpenModal (event) {
     imgForModal.alt = event.target.alt;
     // console.log(dataSour);
   }
-
   event.PreventDefault();
   window.addEventListener('keydown', onESCpress);
 };
@@ -47,8 +42,6 @@ function onCloseModal (event) {
     backDropRef.classList.remove("is-open");
     imgForModal.src = DefaultValue;
   }
-  
-  event.preventDefault();
   window.removeEventListener('keydown', onESCpress);
 };
 
